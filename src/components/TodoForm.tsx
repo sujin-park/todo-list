@@ -1,6 +1,5 @@
-import React, { FormEvent, useState, useRef, ChangeEvent } from 'react';
+import React, { FormEvent, useRef } from 'react';
 import styled from 'styled-components';
-import { Dayjs } from 'dayjs';
 
 import { Todo } from '../modules/todos';
 import Input from './common/Input';
@@ -8,6 +7,8 @@ import Textarea from './common/Textarea';
 import Datepicker from './common/Datepicker';
 import Button from './common/Button';
 import Checkbox from './common/Checkbox';
+
+import useTodoState from '../hooks/useTodoState';
 
 interface TodoFormProps {
   id: number;
@@ -37,7 +38,7 @@ const InputContainer = styled.div`
 const TodoForm: React.FC<TodoFormProps> = ({ id, onInsert }) => {
   const ref = useRef<HTMLInputElement>(null);
 
-  const [state, setState] = useState({
+  const [state, onChange, onChangeDate, onReset] = useTodoState({
     title: '',
     content: '',
     deadline: '',
@@ -45,20 +46,6 @@ const TodoForm: React.FC<TodoFormProps> = ({ id, onInsert }) => {
   });
 
   const isEmptyValue = !state.title || !state.content;
-
-  const onChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setState({
-      ...state,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const onChangeDate = (date: Dayjs | null, dateString: string) => {
-    setState({
-      ...state,
-      deadline: dateString,
-    });
-  };
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -74,12 +61,7 @@ const TodoForm: React.FC<TodoFormProps> = ({ id, onInsert }) => {
       order: id,
     });
 
-    setState({
-      title: '',
-      content: '',
-      deadline: '',
-      done: false,
-    });
+    onReset();
   };
 
   return (
