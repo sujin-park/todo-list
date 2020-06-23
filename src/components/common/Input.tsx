@@ -19,17 +19,19 @@ const InputContainer = styled.input`
   outline: 0 none;
   box-sizing: border-box;
   margin-bottom: 8px;
+  background: transparent;
+  color: ${({ theme }) => theme.colors.text};
 
   &::placeholder {
-    color: ${({ theme }) => theme.lightGreyColor};
+    color: ${({ theme }) => theme.colors.lightGrey};
   }
 
   &:focus {
-    border-bottom: solid 1px ${({ theme }) => theme.primaryColor};
+    border-bottom: solid 1px ${({ theme }) => theme.colors.primary};
   }
 
   &:read-only {
-    color: ${({ theme }) => theme.lightGreyColor};
+    color: ${({ theme }) => theme.colors.lightGrey};
     text-decoration: line-through;
     border: 0 none;
   }

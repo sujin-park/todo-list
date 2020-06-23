@@ -30,7 +30,7 @@ const TodoItemContainer = styled.li`
   &:hover {
     border-radius: 4px;
     transition: box-shadow 0.5s;
-    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: ${({ theme }) => theme.boxShadow};
   }
 `;
 

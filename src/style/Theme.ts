@@ -1,15 +1,25 @@
-const BOX_BORDER = '1px solid #dee2e6';
-const BORDER_RADIUS = '4px';
-
-export default {
-  maxWidth: '100%',
-  primaryColor: '#FF922B',
-  blackColor: '#000',
-  lightGreyColor: '#D3D3D3',
-  redColor: '#FF2264',
-  boxBorder: BOX_BORDER,
-  borderRadius: BORDER_RADIUS,
-  whiteBox: `border-radius: ${BORDER_RADIUS};
-             border: ${BOX_BORDER};
-             background-color: #fff`,
+export const dark = {
+  boxShadow: '2px 2px 2px 2px #ffffff61',
+  colors: {
+    primary: '#FF922B',
+    text: '#fff',
+    lightGrey: '#888',
+    light: 'rgba(#fff, 0.8)',
+    contents: '#000',
+    bg: '#000',
+  },
 };
+
+export const light = {
+  boxShadow: '2px 2px 2px 2px #d2cfcf',
+  colors: {
+    primary: '#FF922B',
+    text: '#000',
+    lightGrey: '#D3D3D3',
+    light: '#fff',
+    contents: '#fff',
+    bg: '#e9ecef',
+  },
+};
+
+export type ThemeType = typeof dark | typeof light;

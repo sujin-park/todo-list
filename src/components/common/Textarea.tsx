@@ -19,18 +19,20 @@ const TextareaContainer = styled.textarea`
   box-sizing: border-box;
   padding: 4px 0;
   margin-bottom: 8px;
+  color: ${({ theme }) => theme.colors.text};
   resize: none;
+  background: transparent;
 
   &::placeholder {
-    color: ${({ theme }) => theme.lightGreyColor};
+    color: ${({ theme }) => theme.colors.lightGrey};
   }
 
   &:focus {
-    border-bottom: solid 1px ${({ theme }) => theme.primaryColor};
+    border-bottom: solid 1px ${({ theme }) => theme.colors.primary};
   }
 
   &:read-only {
-    color: ${({ theme }) => theme.lightGreyColor};
+    color: ${({ theme }) => theme.colors.lightGrey};
     text-decoration: line-through;
     border: 0 none;
   }

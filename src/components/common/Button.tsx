@@ -11,15 +11,15 @@ const Container = styled.button`
   display: block;
   width: 48px;
   height: 24px;
-  color: ${({ theme }) => theme.primaryColor};
-  background: #fff;
+  color: ${({ theme }) => theme.colors.primary};
+  background: transparent;
   font-size: 12px;
   font-weight: bold;
   border: 0 none;
   cursor: pointer;
   outline: 0 none;
   &:disabled {
-    color: ${({ theme }) => theme.lightGreyColor};
+    color: ${({ theme }) => theme.colors.lightGrey};
   }
 `;
 

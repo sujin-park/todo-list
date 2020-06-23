@@ -15,9 +15,11 @@ interface TodoListProps {
 }
 
 const TodoListContainer = styled.ul`
-  height: 500px;
-  overflow: auto;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
   list-style: none;
+  padding: 0 2px;
 `;
 
 const TodoList: React.FC<TodoListProps> = ({

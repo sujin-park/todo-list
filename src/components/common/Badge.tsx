@@ -6,7 +6,7 @@ const BadgeContainer = styled.div`
   width: 60px;
   font-size: 12px;
   font-weight: bold;
-  color: ${({ theme }) => theme.blackColor};
+  color: ${({ theme }) => theme.colors.text};
   text-align: center;
   margin-left: 8px;
 `;

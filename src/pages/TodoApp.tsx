@@ -15,13 +15,17 @@ import Nav from '../components/Nav';
 import TodoList from '../components/TodoList';
 import TodoForm from '../components/TodoForm';
 
-const TodoAppContainer = styled.main`
+interface TodoAppProps {
+  toggleTheme: () => void;
+}
+
+const TodoAppContainer = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
   height: 100vh;
-  background: #fff;
-  box-shadow: 0 0 8px 0 rgba(#000, 0.04);
+  background: ${({ theme }) => theme.colors.contents};
+  box-shadow: ${({ theme }) => theme.boxShadow};
   padding: 32px 16px;
 
   @media only screen and (min-width: 768px) {
@@ -43,20 +47,20 @@ const Title = styled.p`
   justify-content: space-between;
   font-size: 24px;
   font-weight: bold;
-  color: ${({ theme }) => theme.blackColor};
+  color: ${({ theme }) => theme.colors.text};
   padding-bottom: 16px;
   margin-bottom: 8px;
-  border-bottom: solid 1px ${({ theme }) => theme.lightGreyColor};
+  border-bottom: solid 1px ${({ theme }) => theme.colors.text};
   box-sizing: border-box;
 `;
 
 const Alarm = styled.span`
   font-size: 12px;
   font-weight: normal;
-  color: ${({ theme }) => theme.primaryColor};
+  color: ${({ theme }) => theme.colors.primary};
 `;
 
-const TodoApp: React.FC = () => {
+const TodoApp: React.FC<TodoAppProps> = ({ toggleTheme }) => {
   const [type, setType] = useState('todo');
 
   const dispatch = useDispatch();
@@ -124,7 +128,11 @@ const TodoApp: React.FC = () => {
 
   return (
     <TodoAppContainer>
-      <Nav navigations={navigations} onChange={setType} />
+      <Nav
+        navigations={navigations}
+        onChange={setType}
+        toggleTheme={toggleTheme}
+      />
       <ListContainer>
         <List />
       </ListContainer>

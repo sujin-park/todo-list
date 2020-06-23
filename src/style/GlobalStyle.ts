@@ -1,7 +1,9 @@
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 
-export default createGlobalStyle`
+import { ThemeType } from './Theme';
+
+export default createGlobalStyle<{ theme: ThemeType }>`
   ${reset};
   * {
     box-sizing: border-box;
@@ -9,7 +11,7 @@ export default createGlobalStyle`
     padding: 0;
   }
   body {
-    background-color: #e9ecef;
+    background: ${({ theme }) => theme.colors.bg};
     font-family: 'NanumSquareRound';
   }
 ;`;

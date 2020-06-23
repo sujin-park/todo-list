@@ -5,6 +5,7 @@ import generatePicker from 'antd/es/date-picker/generatePicker';
 
 import 'antd/dist/antd.css';
 import locale from 'antd/es/date-picker/locale/ko_KR';
+import styled from 'styled-components';
 
 interface DatepickerProps {
   value?: string;
@@ -15,21 +16,25 @@ interface DatepickerProps {
 
 const AntdPicker = generatePicker<Dayjs>(dayjsGenerateConfig);
 
+const DateContainer = styled(AntdPicker)`
+  padding: 0;
+  input {
+    color: ${({ theme }) => theme.colors.text};
+  }
+`;
+
 const Datepicker: React.FC<DatepickerProps> = ({
   value,
   disabled,
-  highlight = false,
   onChange,
 }) => {
-  const fontWeight = highlight ? 'bold' : 'normal';
   const date = value ? dayjs(value) : null;
 
   return (
-    <AntdPicker
+    <DateContainer
       locale={locale}
       size="small"
-      placeholder="마감 날짜"
-      style={{ padding: 0, fontWeight: fontWeight }}
+      placeholder="마감일"
       bordered={false}
       value={date}
       disabled={disabled}

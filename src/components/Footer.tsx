@@ -7,7 +7,7 @@ const FooterContainer = styled.footer`
   font-size: 12px;
   line-height: 48px;
   color: #fff;
-  background: ${({ theme }) => theme.blackColor};
+  background: ${({ theme }) => theme.colors.bg};
   text-align: center;
 `;
 

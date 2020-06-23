@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { StarFilled, BookFilled } from '@ant-design/icons';
 
+import Switch from './common/Switch';
+
 interface NavItem {
   type: string;
   icon: string;
@@ -11,6 +13,7 @@ interface NavItem {
 interface NavProps {
   navigations: NavItem[];
   onChange: (key: string) => void;
+  toggleTheme: () => void;
 }
 
 const NavContainer = styled.nav`
@@ -21,8 +24,8 @@ const NavContainer = styled.nav`
 
 const NavItem = styled.p`
   font-weight: bold;
-  color: ${({ theme }) => theme.blackColor};
-  margin-bottom: 16px;
+  color: ${({ theme }) => theme.colors.text};
+  margin: 16px 0;
   cursor: pointer;
 `;
 
@@ -36,12 +39,13 @@ const StarIcon = styled(StarFilled)`
 const ArchiveIcon = styled(BookFilled)`
   font-size: 16px;
   font-weight: bold;
-  color: ${({ theme }) => theme.darkGreyColor};
+  color: ${({ theme }) => theme.colors.lightGrey};
   margin-right: 6px;
 `;
 
-const Nav: React.FC<NavProps> = ({ navigations, onChange }) => (
+const Nav: React.FC<NavProps> = ({ navigations, onChange, toggleTheme }) => (
   <NavContainer>
+    <Switch toggleTheme={toggleTheme} />
     {navigations.map(item => (
       <NavItem key={item.type} onClick={() => onChange(item.type)}>
         {item.type === 'todo' ? <StarIcon /> : <ArchiveIcon />}

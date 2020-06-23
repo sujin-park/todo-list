@@ -1,23 +1,25 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
-
 import GlobalStyle from './style/GlobalStyle';
-import Theme from './style/Theme';
-import Footer from './components/Footer';
-import TodoApp from './pages/TodoApp';
 
-// drag & drop library
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
+import useTheme from './hooks/useTheme';
+
+import Footer from './components/Footer';
+import TodoApp from './pages/TodoApp';
+
 const App: React.FC = () => {
+  const [theme, toggleTheme] = useTheme();
+
   return (
-    <ThemeProvider theme={Theme}>
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
       <DndProvider backend={HTML5Backend}>
-        <GlobalStyle />
-        <TodoApp />
+        <TodoApp toggleTheme={toggleTheme} />
+        <Footer />
       </DndProvider>
-      <Footer />
     </ThemeProvider>
   );
 };
