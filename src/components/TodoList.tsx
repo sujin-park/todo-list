@@ -40,7 +40,7 @@ const TodoList: React.FC<TodoListProps> = ({
         })
       );
     },
-    [todos]
+    [onChangeOrder, todos]
   );
 
   return (
