@@ -16,12 +16,6 @@ const CheckboxContainer = styled.input.attrs({
   border: solid 1px rgba(#ccc, 0.7);
   background-color: #fff;
   box-sizing: border-box;
-
-  &:checked {
-    background: url('../../assets/icon/checkbox.svg') center no-repeat;
-    background-size: contain;
-    border: 0 none;
-  }
 `;
 
 const Checkbox: React.FC<CheckboxProps> = ({ done, onChange }) => {

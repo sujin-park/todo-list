@@ -8,6 +8,7 @@ interface InputProps {
   placeholder?: string;
   readOnly?: boolean;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: () => void;
 }
 
 const InputContainer = styled.input`
@@ -38,7 +39,7 @@ const InputContainer = styled.input`
 `;
 
 const Input: React.FC<InputProps> = forwardRef(
-  ({ name, value, placeholder, readOnly = false, onChange }, ref) => {
+  ({ name, value, placeholder, readOnly = false, onChange, onBlur }, ref) => {
     return (
       <InputContainer
         type="text"
@@ -48,6 +49,7 @@ const Input: React.FC<InputProps> = forwardRef(
         readOnly={readOnly}
         placeholder={placeholder}
         onChange={onChange}
+        onBlur={onBlur}
       />
     );
   }

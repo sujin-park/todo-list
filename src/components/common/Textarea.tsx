@@ -8,6 +8,7 @@ interface TextareaProps {
   placeholder?: string;
   readOnly?: boolean;
   onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+  onBlur?: () => void;
 }
 
 const TextareaContainer = styled.textarea`
@@ -44,6 +45,7 @@ const Textarea: React.FC<TextareaProps> = ({
   placeholder,
   readOnly = false,
   onChange,
+  onBlur,
 }) => {
   return (
     <TextareaContainer
@@ -52,6 +54,7 @@ const Textarea: React.FC<TextareaProps> = ({
       readOnly={readOnly}
       placeholder={placeholder}
       onChange={onChange}
+      onBlur={onBlur}
     />
   );
 };
