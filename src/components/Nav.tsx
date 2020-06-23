@@ -17,30 +17,43 @@ interface NavProps {
 }
 
 const NavContainer = styled.nav`
-  flex: 0 0 160px;
+  flex: 0 0 100px;
   padding-right: 24px;
-  box-sizing: border-box;
+  @media only screen and (min-width: 768px) {
+    flex: 0 0 160px;
+    padding-right: 24px;
+  }
 `;
 
 const NavItem = styled.p`
+  font-size: 14px;
   font-weight: bold;
   color: ${({ theme }) => theme.colors.text};
   margin: 16px 0;
   cursor: pointer;
+  @media only screen and (min-width: 768px) {
+    font-size: 16px;
+  }
 `;
 
 const StarIcon = styled(StarFilled)`
-  font-size: 16px;
+  font-size: 12px;
   font-weight: bold;
   color: #fec500;
   margin-right: 5px;
+  @media only screen and (min-width: 768px) {
+    font-size: 16px;
+  }
 `;
 
 const ArchiveIcon = styled(BookFilled)`
-  font-size: 16px;
+  font-size: 12px;
   font-weight: bold;
   color: ${({ theme }) => theme.colors.lightGrey};
   margin-right: 6px;
+  @media only screen and (min-width: 768px) {
+    font-size: 16px;
+  }
 `;
 
 const Nav: React.FC<NavProps> = ({ navigations, onChange, toggleTheme }) => (

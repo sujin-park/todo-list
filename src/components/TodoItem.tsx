@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import { Todo } from '../modules/todos';
 
@@ -10,6 +10,7 @@ import Datepicker from './common/Datepicker';
 
 import Textarea from './common/Textarea';
 import dayjs, { Dayjs } from 'dayjs';
+import useTodoState from '../hooks/useTodoState';
 
 interface TodoItemProps {
   todo: Todo;
@@ -49,22 +50,31 @@ const TodoItem: React.FC<TodoItemProps> = ({
   onToggle,
   onRemove,
 }) => {
+  const ref = useRef<HTMLInputElement>(null);
+
+  const [state, onChange] = useTodoState({
+    title: todo.title,
+    content: todo.content,
+    deadline: todo.deadline,
+    done: todo.done,
+  });
+
   const calculateDday = () => {
     const today = dayjs(new Date());
-    const deadline = dayjs(todo.deadline);
+    const deadline = dayjs(state.deadline);
     return today.diff(deadline, 'day');
   };
 
-  const dDay = todo.deadline ? calculateDday() : 0;
+  const dDay = state.deadline ? calculateDday() : 0;
 
-  const onChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleUpdate = () => {
     onUpdate({
       ...todo,
-      [e.target.name]: e.target.value,
+      ...state,
     });
   };
 
-  const onChangeDate = (date: Dayjs | null, dateString: string) => {
+  const handleChangeDate = (date: Dayjs | null, dateString: string) => {
     onUpdate({
       ...todo,
       deadline: dateString,
@@ -73,30 +83,33 @@ const TodoItem: React.FC<TodoItemProps> = ({
 
   return (
     <TodoItemContainer>
-      <Checkbox done={todo.done} onChange={() => onToggle(todo.id)} />
+      <Checkbox done={state.done} onChange={() => onToggle(todo.id)} />
       <InputContainer>
         <Input
+          ref={ref}
           name="title"
-          value={todo.title}
-          readOnly={todo.done}
+          value={state.title}
+          readOnly={state.done}
           onChange={onChange}
+          onBlur={handleUpdate}
         />
         <Textarea
           name="content"
           placeholder="내용을 입력해주세요."
-          value={todo.content}
-          readOnly={todo.done}
+          value={state.content}
+          readOnly={state.done}
           onChange={onChange}
+          onBlur={handleUpdate}
         />
-        {!todo.done && (
+        {!state.done && (
           <DateContainer>
             <Datepicker
-              value={todo.deadline}
-              disabled={todo.done}
+              value={state.deadline}
+              disabled={state.done}
               highlight={dDay > 0}
-              onChange={onChangeDate}
+              onChange={handleChangeDate}
             />
-            {!todo.done && dDay > 0 && <Badge>{dDay}일 지남</Badge>}
+            {!state.done && dDay > 0 && <Badge>{dDay}일 지남</Badge>}
           </DateContainer>
         )}
       </InputContainer>
