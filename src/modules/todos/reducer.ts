@@ -1,5 +1,6 @@
 import { TodosState, TodosAction } from './types';
 import { createReducer } from 'typesafe-actions';
+
 import {
   ADD_TODO,
   UPDATE_TODO,
@@ -19,12 +20,11 @@ const todos = createReducer<TodosState, TodosAction>(initialState, {
     state.map(todo =>
       todo.id === payload.id ? { ...todo, ...payload } : todo
     ),
-  [CHANGE_ORDER]: (state, { payload: { id, order } }) =>
-    state.map(todo => (todo.id === id ? { ...todo, order } : todo)),
   [TOGGLE_TODO]: (state, { payload: id }) =>
     state.map(todo => (todo.id === id ? { ...todo, done: !todo.done } : todo)),
-  [REMOVE_TODO]: (state: TodosState, { payload: id }) =>
+  [REMOVE_TODO]: (state, { payload: id }) =>
     state.filter(todo => todo.id !== id),
+  [CHANGE_ORDER]: (state, action) => action.payload,
 });
 
 export default todos;

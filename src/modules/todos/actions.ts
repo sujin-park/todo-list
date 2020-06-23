@@ -11,7 +11,4 @@ export const addTodo = createAction(ADD_TODO)<Todo>();
 export const updateTodo = createAction(UPDATE_TODO)<Todo>();
 export const toggleTodo = createAction(TOGGLE_TODO)<number>();
 export const removeTodo = createAction(REMOVE_TODO)<number>();
-export const changeOrder = createAction(CHANGE_ORDER)<{
-  id: number;
-  order: number;
-}>();
+export const changeOrder = createAction(CHANGE_ORDER)<Todo[]>();
