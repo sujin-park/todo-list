@@ -1,6 +1,6 @@
 import React, { FormEvent, useState, useRef, ChangeEvent } from 'react';
 import styled from 'styled-components';
-import { Moment } from 'moment';
+import { Dayjs } from 'dayjs';
 
 import { Todo } from '../modules/todos';
 import Input from './common/Input';
@@ -53,7 +53,7 @@ const TodoForm: React.FC<TodoFormProps> = ({ id, onInsert }) => {
     });
   };
 
-  const onChangeDate = (date: Moment | null, dateString: string) => {
+  const onChangeDate = (date: Dayjs | null, dateString: string) => {
     setState({
       ...state,
       deadline: dateString,

@@ -8,8 +8,8 @@ import Input from './common/Input';
 import Button from './common/Button';
 import Datepicker from './common/Datepicker';
 
-import moment, { Moment } from 'moment';
 import Textarea from './common/Textarea';
+import dayjs, { Dayjs } from 'dayjs';
 
 interface TodoItemProps {
   todo: Todo;
@@ -50,9 +50,9 @@ const TodoItem: React.FC<TodoItemProps> = ({
   onRemove,
 }) => {
   const calculateDday = () => {
-    const today = moment(new Date());
-    const deadline = moment(todo.deadline);
-    return today.diff(deadline, 'days');
+    const today = dayjs(new Date());
+    const deadline = dayjs(todo.deadline);
+    return today.diff(deadline, 'day');
   };
 
   const dDay = todo.deadline ? calculateDday() : 0;
@@ -64,7 +64,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
     });
   };
 
-  const onChangeDate = (date: Moment | null, dateString: string) => {
+  const onChangeDate = (date: Dayjs | null, dateString: string) => {
     onUpdate({
       ...todo,
       deadline: dateString,
