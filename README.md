@@ -1,68 +1,93 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# TO DO LIST
 
-## Available Scripts
+[![typescript](https://img.shields.io/badge/typescript-v.3.9.3-blue)](https://www.typescriptlang.org/)
+[![react](https://img.shields.io/badge/react-v.16.13.1-blue)](https://reactjs.org/)
+[![redux](https://img.shields.io/badge/redux-v.4.0.5-purple)](https://redux.js.org/)
 
-In the project directory, you can run:
+## URL
 
-### `yarn start`
+[https://todo-sinsa.netlify.app/](https://todo-sinsa.netlify.app/)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Prerequisites
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+- [Node.js](https://nodejs.org/ko/)
+- [Yarn](https://yarnpkg.com/)
 
-### `yarn test`
+## Installation
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 1. Clone the project
 
-### `yarn build`
+```bash
+$ git clone https://github.com/sujin-park/todo-list.git
+```
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 2. Install Packages
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+```bash
+$ yarn (install)
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 3. Start Application
 
-### `yarn eject`
+```bash
+$ yarn start
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Structure
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+boilerplate 프로젝트인 create-react-app 으로 구성하였습니다.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```
+src
+├── components
+│   ├── common
+│   │   ├── Badge.tsx
+│   │   ├── Button.tsx
+│   │   ├── Checkbox.tsx
+│   │   ├── Datepicker.tsx
+│   │   ├── DraggedItem.tsx
+│   │   ├── Input.tsx
+│   │   ├── Switch.tsx
+│   │   └── Textarea.tsx
+│   ├── Footer.tsx
+│   ├── Nav.tsx
+│   ├── TodoForm.tsx
+│   ├── TodoItem.tsx
+│   └── TodoList.tsx
+├── hooks
+│   ├── useTheme.ts
+│   └── useTodoState.ts
+├── pages
+│   └── TodoApp.tsx
+├── modules
+│   ├── todos
+│   │   ├── actions.ts
+│   │   ├── reducer.ts
+│   │   ├── types.ts
+│   │   └── index.ts
+│   └── index.ts
+├── style
+│   ├── Theme.ts
+│   └── GlobalStyle.ts
+├── pages
+│   └── TodoApp.tsx
+├── index.tsx
+└── App.tsx
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+1. `components` : Presentational Components
 
-## Learn More
+2. `pages` : Container Components
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+3. `hooks` : Custom made hooks
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+4. `modules` : Redux Actions & Action Types & Reducers
 
-### Code Splitting
+5. `style` : Global Style & Theme (light & dark)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+### Dependencies
 
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- [Styled Components](https://styled-components.com/)
+- [React drag&drop API](https://react-dnd.github.io/react-dnd/about)
+- [Ant design](https://ant.design)
+- [Day.js](https://github.com/iamkun/dayjs)
