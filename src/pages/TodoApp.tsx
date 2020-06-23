@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../modules';
 import {
@@ -11,19 +11,30 @@ import {
 import { Todo } from '../modules/todos';
 
 import styled from 'styled-components';
+import Nav from '../components/Nav';
 import TodoList from '../components/TodoList';
 import TodoForm from '../components/TodoForm';
 
 const TodoAppContainer = styled.main`
   display: flex;
-  flex-direction: column;
-  width: 600px;
+  flex-direction: row;
+  width: 100%;
   height: 100vh;
   background: #fff;
-  border-radius: 18px;
   box-shadow: 0 0 8px 0 rgba(#000, 0.04);
-  margin: 48px auto 32px;
   padding: 32px 16px;
+
+  @media only screen and (min-width: 768px) {
+    width: 100%;
+    max-width: 800px;
+    margin: 48px auto 32px;
+  }
+`;
+
+const ListContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 `;
 
 const Title = styled.p`
@@ -32,7 +43,7 @@ const Title = styled.p`
   justify-content: space-between;
   font-size: 24px;
   font-weight: bold;
-  color: #000;
+  color: ${({ theme }) => theme.blackColor};
   padding-bottom: 16px;
   margin-bottom: 8px;
   border-bottom: solid 1px ${({ theme }) => theme.lightGreyColor};
@@ -46,11 +57,24 @@ const Alarm = styled.span`
 `;
 
 const TodoApp: React.FC = () => {
+  const [type, setType] = useState('todo');
+
   const dispatch = useDispatch();
   const todos = useSelector((state: RootState) => state.todos);
+  const nextId = todos.length + 1;
 
-  const notCompletedTodos = todos.filter(todo => !todo.done);
-  const completedTodos = todos.filter(todo => todo.done);
+  const navigations = [
+    {
+      type: 'todo',
+      icon: 'StarIcon',
+      title: 'Things to do',
+    },
+    {
+      type: 'archive',
+      icon: 'ArchiveIcon',
+      title: 'Archive',
+    },
+  ];
 
   const onChangeOrder = (todos: Todo[]) => {
     dispatch(changeOrder(todos));
@@ -72,34 +96,38 @@ const TodoApp: React.FC = () => {
     dispatch(removeTodo(id));
   };
 
-  return (
-    <TodoAppContainer>
+  const navigationType = navigations.find(nav => nav.type === type);
+  const selectedTodos = todos.filter(todo =>
+    type === 'todo' ? !todo.done : todo.done
+  );
+
+  const List = () => (
+    <>
       <Title>
-        Things to do
-        {notCompletedTodos.length > 0 && (
-          <Alarm>할 일 {notCompletedTodos.length}개 남음</Alarm>
+        {navigationType!.title}
+        {selectedTodos.length > 0 && (
+          <Alarm>
+            할 일 {selectedTodos.length}개 {type === 'todo' ? '남음' : '완료'}
+          </Alarm>
         )}
       </Title>
-      <TodoForm id={todos.length + 1} onInsert={onInsert} />
+      {type === 'todo' && <TodoForm id={nextId} onInsert={onInsert} />}
       <TodoList
-        todos={notCompletedTodos}
+        todos={selectedTodos}
         onUpdate={onUpdate}
         onToggle={onToggle}
         onRemove={onRemove}
         onChangeOrder={onChangeOrder}
       />
-      {completedTodos.length > 0 && (
-        <>
-          <Title>Archive</Title>
-          <TodoList
-            todos={completedTodos}
-            onUpdate={onUpdate}
-            onToggle={onToggle}
-            onRemove={onRemove}
-            onChangeOrder={onChangeOrder}
-          />
-        </>
-      )}
+    </>
+  );
+
+  return (
+    <TodoAppContainer>
+      <Nav navigations={navigations} onChange={setType} />
+      <ListContainer>
+        <List />
+      </ListContainer>
     </TodoAppContainer>
   );
 };
